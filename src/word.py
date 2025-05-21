@@ -16,7 +16,7 @@ class Word():
     def _get_length(self):
         while True:
             try:
-                user_input = int(input("Choose a difficulty:\n1 - Easy\n2 - Medium\n3 - Hard\n"))
+                user_input = int(input("\nChoose a difficulty:\n1 - Easy\n2 - Medium\n3 - Hard\n"))
                 match user_input:
                     case 1:
                         print("Starting game on Easy!")
