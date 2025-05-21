@@ -12,10 +12,9 @@ class Game():
     
     def play(self):
         self._start_game()
-        return self.play_again
+        return self.play_again, self._word._point_value
 
     def _start_game(self):
-        print("Welcome to notWordle!\n")
         while (self._current_round < self._max_rounds) and not (self._victory):
             try:
                 self._next_round()
@@ -42,15 +41,37 @@ class Game():
         if user_input == self._word.value:
             self._win_game()
             return
-        for i in range(self._word.length):
-            if user_input[i] == self._word.value[i]:
-                self._current_progress[i] = user_input[i]
+        self._check_letters(user_input)
         self._current_round += 1
 
     def _win_game(self):
         print("\n" + " ".join(self._word.value))
         print("\nYOU WIN!")
         self._victory = True
+
+    def _check_letters(self, user_input):
+        check = {}
+        for i in range(self._word.length):
+            check[i] = {"value":user_input[i],"in_word":False, "in_spot":False}
+            if user_input[i] == self._word.value[i]:
+                self._current_progress[i] = user_input[i]
+                check[i]["in_word"] = True
+                check[i]["in_spot"] = True
+            for j in range(self._word.length):
+                if j == i:
+                    continue
+                if user_input[i] == self._word.value[j]:
+                    check[i]["in_word"] = True
+        
+        for i in range(self._word.length):
+            if check[i]["in_word"]:
+                if check[i]["in_spot"]:
+                    print(f"{check[i]["value"]} - Correct Letter, Correct Spot")
+                else:
+                    print(f"{check[i]["value"]} - Correct Letter, Incorrect Spot")
+            else:
+                print(f"{check[i]["value"]} - Incorrect Letter, Incorrect Spot")
+
 
     def _continue(self):
         user_input = str.upper(input("\nPlay again? (Y/N): "))

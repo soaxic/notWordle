@@ -2,28 +2,32 @@ import random, csv
 from constants import *
 
 class Word():
-    def __init__(self, args):
-        try:
-            self._seed = args[1]
-        except IndexError:
-            self._seed = None
+    def __init__(self, seed=None, debug=False):
+        self._debug = debug
+        self._seed = seed
         random.seed(self._seed)
-        self.length = self._get_length()
+        self._point_value = 0
+        self.length = 0
+        self._get_length()
         self.value = self._get_word(self.length)
-        print(f"Current word: {self.value}")
+        if self._debug:
+            print(f"DEBUG - Current word: {self.value}")
 
     def _get_length(self):
-        length = 0
-        while length == 0:
+        while True:
             try:
                 user_input = int(input("Choose a difficulty:\n1 - Easy\n2 - Medium\n3 - Hard\n"))
                 match user_input:
                     case 1:
                         print("Starting game on Easy!")
-                        length = 4
+                        self._point_value = 1
+                        self.length = 4
+                        break
                     case 2:
                         print("Starting game on Medium!")
-                        length = 5
+                        self._point_value = 2
+                        self.length = 5
+                        break
                     case 3:
                         #TODO - NYI
                         print("\nNYI - Please try again\n\n")
@@ -32,7 +36,7 @@ class Word():
             except ValueError:
                 print("\nInvalid input\n\n")
         print("\n\n\n\n\n\n")
-        return length
+        return
             
     def _get_word(self, length):
         match length:
