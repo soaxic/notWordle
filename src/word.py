@@ -1,18 +1,18 @@
 import random, csv
+from constants import *
 
 class Word():
     def __init__(self, args):
         try:
             self._seed = args[1]
-            random.seed(self._seed)
         except IndexError:
             self._seed = None
-            random.seed()
-        self._length = self.get_length()
-        self.word = self.get_word(self._length)
-        print(self.word)
+        random.seed(self._seed)
+        self.length = self._get_length()
+        self.value = self._get_word(self.length)
+        print(f"Current word: {self.value}")
 
-    def get_length(self):
+    def _get_length(self):
         length = 0
         while length == 0:
             try:
@@ -25,21 +25,24 @@ class Word():
                         print("Starting game on Medium!")
                         length = 5
                     case 3:
+                        #TODO - NYI
                         print("\nNYI - Please try again\n\n")
                     case _:
                         print("\nInvalid input\n\n")
             except ValueError:
                 print("\nInvalid input\n\n")
+        print("\n\n\n\n\n\n")
         return length
             
-    def get_word(self, length):
+    def _get_word(self, length):
         match length:
             case 4:
-                words_csv = "content/four_letter_words.csv"
+                words_csv = FOUR_LETTER_WORDS_CSV
             case 5:
-                words_csv = "content/five_letter_words.csv"
+                words_csv = FIVE_LETTER_WORDS_CSV
             case 6:
-                words_csv = "content/six_letter_words.csv"
+                #TODO - NYI
+                words_csv = SIX_LETTER_WORDS_CSV
         wordlist = []
         with open(words_csv, mode="r", newline='') as csvfile:
             csvreader = csv.reader(csvfile)
