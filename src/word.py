@@ -10,6 +10,7 @@ class Word():
         self.length = 0
         self._get_length()
         self.value = self._get_word(self.length)
+        self.valueset = set(self.value)
         if self._debug:
             print(f"DEBUG - Current word: {self.value}")
 
@@ -20,12 +21,12 @@ class Word():
                 match user_input:
                     case 1:
                         print("Starting game on Easy!")
-                        self._point_value = 1
+                        self._point_value = EASY_POINTS_VALUE
                         self.length = 4
                         break
                     case 2:
                         print("Starting game on Medium!")
-                        self._point_value = 2
+                        self._point_value = MEDIUM_POINTS_VALUE
                         self.length = 5
                         break
                     case 3:

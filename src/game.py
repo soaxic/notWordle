@@ -53,15 +53,11 @@ class Game():
         check = {}
         for i in range(self._word.length):
             check[i] = {"value":user_input[i],"in_word":False, "in_spot":False}
+            if user_input[i] in self._word.valueset:
+                check[i]["in_word"] = True
             if user_input[i] == self._word.value[i]:
                 self._current_progress[i] = user_input[i]
-                check[i]["in_word"] = True
                 check[i]["in_spot"] = True
-            for j in range(self._word.length):
-                if j == i:
-                    continue
-                if user_input[i] == self._word.value[j]:
-                    check[i]["in_word"] = True
         
         for i in range(self._word.length):
             if check[i]["in_word"]:
