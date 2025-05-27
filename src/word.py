@@ -22,16 +22,18 @@ class Word():
                     case 1:
                         print("Starting game on Easy!")
                         self._point_value = EASY_POINTS_VALUE
-                        self.length = 4
+                        self.length = EASY_WORD_LENGTH
                         break
                     case 2:
                         print("Starting game on Medium!")
                         self._point_value = MEDIUM_POINTS_VALUE
-                        self.length = 5
+                        self.length = MEDIUM_WORD_LENGTH
                         break
                     case 3:
-                        #TODO - NYI
-                        print("\nNYI - Please try again\n\n")
+                        print("Starting game on Hard!")
+                        self._point_value = HARD_POINTS_VALUE
+                        self.length = HARD_WORD_LENGTH
+                        break
                     case _:
                         print("\nInvalid input\n\n")
             except ValueError:
@@ -46,7 +48,6 @@ class Word():
             case 5:
                 words_csv = FIVE_LETTER_WORDS_CSV
             case 6:
-                #TODO - NYI
                 words_csv = SIX_LETTER_WORDS_CSV
         wordlist = []
         with open(words_csv, mode="r", newline='') as csvfile:

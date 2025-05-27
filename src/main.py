@@ -7,6 +7,7 @@ def main(args):
     print("Welcome to notWordle!\n")
     welcome()
     total_points = 0
+    #TODO replace this garbage with argparse?
     debug = False
     for i in range(len(args)):
         if args[i] == "-Debug":
