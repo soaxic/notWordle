@@ -1,17 +1,15 @@
-import random, csv
+import random, csv, config
 from constants import *
 
 class Word():
-    def __init__(self, seed=None, debug=False):
-        self._debug = debug
-        self._seed = seed
-        random.seed(self._seed)
+    def __init__(self):
+        random.seed(config.SEED)
         self._point_value = 0
         self.length = 0
         self._get_length()
         self.value = self._get_word(self.length)
         self.valueset = set(self.value)
-        if self._debug:
+        if config.DEBUG_MODE:
             print(f"DEBUG - Current word: {self.value}")
 
     def _get_length(self):

@@ -1,36 +1,27 @@
-import sys
+import config
 from word import *
 from game import *
 from saves import *
+from cli_parser import parse_cli_arguments
 
-def main(args):
+def main():
     print("Welcome to notWordle!\n")
+    args = parse_cli_arguments()
+    config.DEBUG_MODE = args.debug
+    config.SEED = args.seed
     welcome()
-    total_points = 0
-    #TODO replace this garbage with argparse?
-    debug = False
-    for i in range(len(args)):
-        if args[i] == "-Debug":
-            debug = True
-            args[i] = None
-    try:
-        seed = args[1]
-    except IndexError:
-        seed = None
-    if debug:
-        print("\n=====DEBUG MODE ON=====")
     try:
         loop = True
         while loop:
-            word = Word(seed=seed, debug=debug)
+            word = Word()
             game = Game(word)
             loop,points = game.play()
             total_points += points
             print(f"\nYour score is: {total_points}\n")
-        if debug:
+        if config.DEBUG_MODE:
             print("\n=====DEBUG MODE ON=====")
         print("\n\nThanks for playing!")
     except KeyboardInterrupt:
         print("\n\nThanks for playing!")
 
-main(sys.argv)
+main()
