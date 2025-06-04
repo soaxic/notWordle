@@ -1,5 +1,5 @@
 from word import *
-from constants import GAME_ROUNDS_MAX
+from constants import GAME_ROUNDS_MAX, CLEAR_SCREEN
 
 class Game():
     def __init__(self, word):
@@ -19,7 +19,8 @@ class Game():
             try:
                 self._next_round()
             except ValueError:
-                print("\nInvalid input!\n")
+                print(CLEAR_SCREEN)
+                print("Invalid input!\n")
         
         if self._current_round == self._max_rounds:
             print("\nMax rounds reached! You lose!")
@@ -45,6 +46,7 @@ class Game():
         self._current_round += 1
 
     def _win_game(self):
+        print(CLEAR_SCREEN)
         print("\n" + " ".join(self._word.value))
         print("\nYOU WIN!")
         self._victory = True
@@ -59,6 +61,7 @@ class Game():
                 self._current_progress[i] = user_input[i]
                 check[i]["in_spot"] = True
         
+        print(CLEAR_SCREEN)
         for i in range(self._word.length):
             if check[i]["in_word"]:
                 if check[i]["in_spot"]:
@@ -67,6 +70,7 @@ class Game():
                     print(f"{check[i]["value"]} - Correct Letter, Incorrect Spot")
             else:
                 print(f"{check[i]["value"]} - Incorrect Letter, Incorrect Spot")
+        print("")
 
 
     def _continue(self):

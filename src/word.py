@@ -15,28 +15,32 @@ class Word():
     def _get_length(self):
         while True:
             try:
-                user_input = int(input("\nChoose a difficulty:\n1 - Easy\n2 - Medium\n3 - Hard\n"))
+                user_input = int(input("\nChoose a difficulty:\n1 - Easy\n2 - Medium\n3 - Hard\n\n"))
                 match user_input:
                     case 1:
-                        print("Starting game on Easy!")
+                        print(CLEAR_SCREEN)
+                        print("Starting game on Easy!\n")
                         self._point_value = EASY_POINTS_VALUE
                         self.length = EASY_WORD_LENGTH
                         break
                     case 2:
-                        print("Starting game on Medium!")
+                        print(CLEAR_SCREEN)
+                        print("Starting game on Medium!\n")
                         self._point_value = MEDIUM_POINTS_VALUE
                         self.length = MEDIUM_WORD_LENGTH
                         break
                     case 3:
-                        print("Starting game on Hard!")
+                        print(CLEAR_SCREEN)
+                        print("Starting game on Hard!\n")
                         self._point_value = HARD_POINTS_VALUE
                         self.length = HARD_WORD_LENGTH
                         break
                     case _:
-                        print("\nInvalid input\n\n")
+                        print(CLEAR_SCREEN)
+                        print("Invalid input\n")
             except ValueError:
-                print("\nInvalid input\n\n")
-        print("\n\n\n\n\n\n")
+                print(CLEAR_SCREEN)
+                print("Invalid input\n")
         return
             
     def _get_word(self, length):
